@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  web:
+    restart: always
+    image: book-api-service
+    ports:
+      - 8005:8005
+    links:
+      - mysql
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysql"
+      - "DB_NAME=booksdb"
+      - "DB_PASS=secret"
+
+  
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3386:3306
+    volumes:
+      - /mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    
