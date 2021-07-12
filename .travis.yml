@@ -4,8 +4,8 @@ services:
   - docker
 
 before_install:
-- go build -v -o dist/book-api-service-1
-- docker build --no-cache -t book-api-service-1 .
+- go build -v -o dist/book-api-service
+- docker build --no-cache -t book-api-service .
 - docker compose up
 
 script:
