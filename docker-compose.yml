@@ -7,9 +7,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=secret
     ports:
-      - 3386:3306
+      - "3306:3306"
     volumes:
-      - data:/var/lib/mysql
+      - data:/var/lib/mysql/data
   server:
     build:
       context: .
