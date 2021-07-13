@@ -2,9 +2,12 @@ language: go
 
 services:
   - docker
+  
+env:
+- GO111MODULE=on
 
 before_install:
-- env GO111MODULE=on go build -v -o dist/book-api-service
+- go build -v -o dist/book-api-service
 - docker build --no-cache -t book-api-service .
 - docker compose up
 
