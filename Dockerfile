@@ -7,6 +7,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o build/book-api-se
 
 FROM alpine
 RUN apk add --no-cache ca-certificates && update-ca-certificates
-COPY --from=builder /go/src/github.com/Salauddin958/book-api-service /usr/bin/book-api-service
+COPY --from=builder /go/src/github.com/Salauddin958/book-api-service/build/book-api-service /usr/bin/book-api-service
 EXPOSE 8080 8080
 ENTRYPOINT ["/usr/bin/book-api-service"]
