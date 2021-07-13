@@ -1,26 +1,30 @@
 version: '3.1'
 
 services:
-  web:
+  database:
+    image: mysql
     restart: always
-    image: book-api-service
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
     ports:
-      - 8005:8005
-    links:
-      - mysql
+      - 3386:3306
+    volumes:
+      - data:/var/lib/mysql/data
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=mysql"
       - "DB_NAME=booksdb"
       - "DB_PASS=secret"
-
-  
-  mysql:
-    image: mysql:latest
+    depends_on:
+      - database
+    networks:
+      - default
     ports:
-      - 3386:3306
-    volumes:
-      - /mysql:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret
-    
+      - "8080:8080"
+volumes: 
+  data:
+  
